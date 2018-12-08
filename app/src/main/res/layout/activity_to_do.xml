@@ -6,10 +6,12 @@
     android:orientation="vertical"
     >
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#71BCFA"
+        android:background="@color/colorPrimary"
         android:padding="6dip" >
 
         <TextView
@@ -19,6 +21,7 @@
             android:layout_marginLeft="2dp"
             android:layout_weight="0.12"
             android:text="@string/service_title"
+            android:textColor="#FFFFFF"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ProgressBar
@@ -30,7 +33,7 @@
      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#71BCFA"
+        android:background="@color/colorSecondary"
         android:padding="6dip"  >
 
         <EditText
@@ -39,6 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
             android:hint="@string/add_textbox_hint" >
             <requestFocus />
         </EditText>
@@ -48,9 +53,17 @@
             android:layout_width="64dip"
             android:layout_height="wrap_content"
             android:onClick="addItem"
+            android:backgroundTint="@color/colorThird"
+            android:textColor="#FFFFFF"
             android:text="@string/add_button_text" />
 
     </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ListView
         android:id="@+id/listViewToDo"
@@ -60,5 +73,7 @@
         android:padding="6dip" >
 
     </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

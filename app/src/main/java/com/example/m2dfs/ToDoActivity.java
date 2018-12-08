@@ -14,12 +14,16 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -48,7 +52,7 @@ import com.squareup.okhttp.OkHttpClient;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.*;
 
-public class ToDoActivity extends Activity {
+public class ToDoActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener{
 
     /**
      * Mobile Service Client reference
@@ -81,6 +85,8 @@ public class ToDoActivity extends Activity {
      */
     private ProgressBar mProgressBar;
 
+    private SwipeRefreshLayout mySwipeRefreshLayout;
+
     /**
      * Initializes the activity
      */
@@ -89,12 +95,16 @@ public class ToDoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do);
 
+        mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(this);
+
         mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
 
         // Initialize the progress bar
         mProgressBar.setVisibility(ProgressBar.GONE);
 
         try {
+
             // Create the Mobile Service Client instance, using the provided
 
             // Mobile Service URL and key
@@ -469,6 +479,19 @@ public class ToDoActivity extends Activity {
         } else {
             return task.execute();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshItemsFromTable();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mySwipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getApplicationContext(), "Data retrieved from azure db", Toast.LENGTH_LONG).show();
+            }
+        }, 1000);
     }
 
     private class ProgressFilter implements ServiceFilter {

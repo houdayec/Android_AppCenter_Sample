@@ -103,7 +103,7 @@ public class ToDoActivity extends Activity {
                     this).withFilter(new ProgressFilter());
 
             Push.setListener(new MyPushListener());
-
+            Push.enableFirebaseAnalytics(getApplication());
 
             AppCenter.start(getApplication(), "bd7c5b29-3ade-4607-b862-b379533dab40",
                     Analytics.class, Crashes.class);

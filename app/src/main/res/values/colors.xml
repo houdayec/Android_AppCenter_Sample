@@ -2,5 +2,10 @@
 <resources>
 
     <color name="notification">#402E5C</color>
+    <color name="colorPrimary">#7221A1</color>
+    <color name="colorSecondary">#7c31a8</color>
+    <color name="colorThird">#8955a8</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
 
 </resources>

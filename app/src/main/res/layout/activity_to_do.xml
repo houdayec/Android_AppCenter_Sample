@@ -40,9 +40,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/add_textbox_hint" >
-
             <requestFocus />
-       </EditText>
+        </EditText>
 
         <Button
             android:id="@+id/buttonAddToDo"
